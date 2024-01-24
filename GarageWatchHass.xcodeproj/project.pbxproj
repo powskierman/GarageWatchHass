@@ -11,7 +11,28 @@
 		D03610172B606A73001CFE29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610162B606A73001CFE29 /* ContentView.swift */; };
 		D03610192B606A75001CFE29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03610182B606A75001CFE29 /* Assets.xcassets */; };
 		D036101C2B606A75001CFE29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D036101B2B606A75001CFE29 /* Preview Assets.xcassets */; };
+		D03610232B606B14001CFE29 /* WatchRestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610222B606B14001CFE29 /* WatchRestManager.swift */; };
+		D03610262B606B52001CFE29 /* HassFramework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D03610252B606B52001CFE29 /* HassFramework.xcframework */; };
+		D03610272B606B52001CFE29 /* HassFramework.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D03610252B606B52001CFE29 /* HassFramework.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D03610402B609305001CFE29 /* enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D036103F2B609305001CFE29 /* enums.swift */; };
+		D03610422B609574001CFE29 /* WatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610412B609574001CFE29 /* WatchView.swift */; };
+		D03610442B6095C7001CFE29 /* WatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610432B6095C7001CFE29 /* WatchViewModel.swift */; };
+		D03610472B609662001CFE29 /* WatchEntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610462B609662001CFE29 /* WatchEntityView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D03610282B606B52001CFE29 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D03610272B606B52001CFE29 /* HassFramework.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D03610112B606A73001CFE29 /* GarageWatchHass Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GarageWatchHass Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -19,6 +40,12 @@
 		D03610162B606A73001CFE29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D03610182B606A75001CFE29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D036101B2B606A75001CFE29 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D03610222B606B14001CFE29 /* WatchRestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRestManager.swift; sourceTree = "<group>"; };
+		D03610252B606B52001CFE29 /* HassFramework.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = HassFramework.xcframework; path = ../Frameworks/HassFramework/HassFramework.xcframework; sourceTree = "<group>"; };
+		D036103F2B609305001CFE29 /* enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enums.swift; sourceTree = "<group>"; };
+		D03610412B609574001CFE29 /* WatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchView.swift; sourceTree = "<group>"; };
+		D03610432B6095C7001CFE29 /* WatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchViewModel.swift; sourceTree = "<group>"; };
+		D03610462B609662001CFE29 /* WatchEntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchEntityView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03610262B606B52001CFE29 /* HassFramework.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +65,7 @@
 			children = (
 				D03610132B606A73001CFE29 /* GarageWatchHass Watch App */,
 				D03610122B606A73001CFE29 /* Products */,
+				D03610242B606B52001CFE29 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,10 +80,14 @@
 		D03610132B606A73001CFE29 /* GarageWatchHass Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				D03610452B60963D001CFE29 /* Views */,
 				D03610142B606A73001CFE29 /* GarageWatchHassApp.swift */,
 				D03610162B606A73001CFE29 /* ContentView.swift */,
 				D03610182B606A75001CFE29 /* Assets.xcassets */,
 				D036101A2B606A75001CFE29 /* Preview Content */,
+				D03610222B606B14001CFE29 /* WatchRestManager.swift */,
+				D036103F2B609305001CFE29 /* enums.swift */,
+				D03610432B6095C7001CFE29 /* WatchViewModel.swift */,
 			);
 			path = "GarageWatchHass Watch App";
 			sourceTree = "<group>";
@@ -67,6 +100,23 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		D03610242B606B52001CFE29 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D03610252B606B52001CFE29 /* HassFramework.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D03610452B60963D001CFE29 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D03610412B609574001CFE29 /* WatchView.swift */,
+				D03610462B609662001CFE29 /* WatchEntityView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,6 +127,7 @@
 				D036100D2B606A73001CFE29 /* Sources */,
 				D036100E2B606A73001CFE29 /* Frameworks */,
 				D036100F2B606A73001CFE29 /* Resources */,
+				D03610282B606B52001CFE29 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -139,6 +190,11 @@
 			files = (
 				D03610172B606A73001CFE29 /* ContentView.swift in Sources */,
 				D03610152B606A73001CFE29 /* GarageWatchHassApp.swift in Sources */,
+				D03610442B6095C7001CFE29 /* WatchViewModel.swift in Sources */,
+				D03610422B609574001CFE29 /* WatchView.swift in Sources */,
+				D03610402B609305001CFE29 /* enums.swift in Sources */,
+				D03610472B609662001CFE29 /* WatchEntityView.swift in Sources */,
+				D03610232B606B14001CFE29 /* WatchRestManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

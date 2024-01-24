@@ -1,14 +1,14 @@
 //
-//  GarageWatchHassApp.swift
-//  GarageWatchHass Watch App
+//  WatchGarageHassApp.swift
+//  WatchGarageHass
 //
-//  Created by Michel Lapointe on 2024-01-23.
+//  Created by Michel Lapointe on 2023-11-16.
 //
 
 import SwiftUI
 
 @main
-struct GarageWatchHassApp: App {
+struct WatchGarageHassApp: App {
     @StateObject var watchViewModel = WatchViewModel()
     var body: some Scene {
         WindowGroup {
