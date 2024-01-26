@@ -9,8 +9,8 @@ import Foundation
 import Combine
 import HassWatchFramework
 
-class GarageRestManager: ObservableObject {
-    static let shared = GarageRestManager()
+class WatchRestManager: ObservableObject {
+    static let shared = WatchRestManager()
     
     @Published var leftDoorClosed: Bool = true
     @Published var rightDoorClosed: Bool = true
@@ -18,30 +18,31 @@ class GarageRestManager: ObservableObject {
     @Published var error: Error?
     @Published var hasErrorOccurred: Bool = false
     @Published var lastCallStatus: CallStatus = .pending
-
-    private var restClient: HassRestClient
+    
+    private var restClient: HassRestClient?
     private var cancellables = Set<AnyCancellable>()
+    private var initializationFailed = false
 
-    init(restClient: HassRestClient = HassRestClient()) {
-        self.restClient = restClient
+    init() {
+        self.restClient = HassRestClient()
         print("[GarageRestManager] Initialized with REST client.")
     }
-
+    
     func fetchInitialState() {
-        print("[GarageRestManager] Fetching initial state.")
+        print("[WatchRestManager] Fetching initial state.")
         lastCallStatus = .pending
         let doorSensors = ["binary_sensor.left_door_sensor", "binary_sensor.right_door_sensor", "binary_sensor.alarm_sensor"]
         doorSensors.forEach { entityId in
-            restClient.fetchState(entityId: entityId) { [weak self] result in
+            restClient?.fetchState(entityId: entityId) { [weak self] result in
                 DispatchQueue.main.async {
-                    print("[GarageRestManager] REST call completed for entityId: \(entityId).")
+                    print("[WatchRestManager] REST call completed for entityId: \(entityId). Result: \(result)")
                     switch result {
                     case .success(let entity):
-                        print("[GarageRestManager] Success fetching state for \(entityId): \(entity)")
+                        print("[WatchRestManager] Success fetching state for \(entityId): \(entity)")
                         self?.lastCallStatus = .success
                         self?.processState(entity)
                     case .failure(let error):
-                        print("[GarageRestManager] Failure fetching state for \(entityId): \(error)")
+                        print("[WatchRestManager] Failure fetching state for \(entityId): \(error)")
                         self?.lastCallStatus = .failure
                         self?.error = error
                         self?.hasErrorOccurred = true
@@ -50,60 +51,69 @@ class GarageRestManager: ObservableObject {
             }
         }
     }
-
-    private func processState(_ entity: HAEntity) {
-        print("[GarageRestManager] Processing state for entity: \(entity)")
+    
+    func processState(_ entity: HAEntity) {
+        print("[WatchRestManager] Processing state for entity: \(entity)")
         switch entity.entityId {
         case "binary_sensor.left_door_sensor":
+            print("[WatchRestManager] Updating leftDoorClosed to: \(entity.state == "off")")
             leftDoorClosed = entity.state == "off"
         case "binary_sensor.right_door_sensor":
+            print("[WatchRestManager] Updating rightDoorClosed to: \(entity.state == "off")")
             rightDoorClosed = entity.state == "off"
         case "binary_sensor.alarm_sensor":
+            print("[WatchRestManager] Updating alarmOff to: \(entity.state == "off")")
             alarmOff = entity.state == "off"
         default:
-            print("[GarageRestManager] State changed or unprocessed entity: \(entity.entityId)")
+            print("[WatchRestManager] Unrecognized entity: \(entity.entityId)")
             break
         }
     }
-
-    func handleEntityAction(entityId: String, newState: String) {
-        print("[GarageRestManager] Handling entity action for \(entityId), new state: \(newState)")
-        lastCallStatus = .pending
-        restClient.changeState(entityId: entityId, newState: newState) { [weak self] result in
-            DispatchQueue.main.async {
-                print("[GarageRestManager] REST call completed for entity action: \(entityId).")
-                switch result {
-                case .success(let entity):
-                    print("[GarageRestManager] Success changing state for \(entityId): \(entity)")
-                    self?.lastCallStatus = .success
-                    self?.processState(entity)
-                case .failure(let error):
-                    print("[GarageRestManager] Failure changing state for \(entityId): \(error)")
-                    self?.lastCallStatus = .failure
-                    self?.error = error
-                    self?.hasErrorOccurred = true
-                }
-            }
-        }
-    }
     
-    func handleScriptAction(entityId: String) {
-        print("[GarageRestManager] Handling script action for \(entityId)")
-        lastCallStatus = .pending
-        restClient.callScript(entityId: entityId) { [weak self] (result: Result<Void, Error>) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success():
-                    print("[GarageRestManager] Script executed successfully")
-                    self?.lastCallStatus = .success
-                case .failure(let error):
-                    print("[GarageRestManager] Error executing script \(entityId): \(error)")
-                    self?.lastCallStatus = .failure
-                    self?.error = error
-                    self?.hasErrorOccurred = true
+    func fetchData() {
+        guard restClient != nil else {
+            print("[WatchRestManager] REST client is not initialized.")
+            return
+        }
+        
+        func handleEntityAction(entityId: String, newState: String) {
+            print("[WatchRestManager] Handling entity action for \(entityId), new state: \(newState)")
+            lastCallStatus = .pending
+            restClient?.changeState(entityId: entityId, newState: newState) { [weak self] result in
+                DispatchQueue.main.async {
+                    print("[WatchRestManager] REST call completed for entity action: \(entityId).")
+                    switch result {
+                    case .success(let entity):
+                        print("[WatchRestManager] Success changing state for \(entityId): \(entity)")
+                        self?.lastCallStatus = .success
+                        self?.processState(entity)
+                    case .failure(let error):
+                        print("[WatchRestManager] Failure changing state for \(entityId): \(error)")
+                        self?.lastCallStatus = .failure
+                        self?.error = error
+                        self?.hasErrorOccurred = true
+                    }
                 }
             }
         }
     }
-}
+        public func handleScriptAction(entityId: String) {
+            print("[WatchRestManager] Handling script action for \(entityId)")
+            lastCallStatus = .pending
+            restClient?.callScript(entityId: entityId) { [weak self] (result: Result<Void, Error>) in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success():
+                        print("[WatchRestManager] Script executed successfully")
+                        self?.lastCallStatus = .success
+                    case .failure(let error):
+                        print("[WatchRestManager] Error executing script \(entityId): \(error)")
+                        self?.lastCallStatus = .failure
+                        self?.error = error
+                        self?.hasErrorOccurred = true
+                    }
+                }
+            }
+        }
+    }
 

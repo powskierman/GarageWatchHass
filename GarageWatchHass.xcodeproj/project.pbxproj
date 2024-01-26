@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D01918AE2B619FE2005DC13A /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D01918AD2B619FE2005DC13A /* Secrets.plist */; };
 		D03610152B606A73001CFE29 /* GarageWatchHassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610142B606A73001CFE29 /* GarageWatchHassApp.swift */; };
-		D03610172B606A73001CFE29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610162B606A73001CFE29 /* ContentView.swift */; };
 		D03610192B606A75001CFE29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03610182B606A75001CFE29 /* Assets.xcassets */; };
 		D036101C2B606A75001CFE29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D036101B2B606A75001CFE29 /* Preview Assets.xcassets */; };
 		D03610232B606B14001CFE29 /* WatchRestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610222B606B14001CFE29 /* WatchRestManager.swift */; };
@@ -35,9 +35,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D01918AD2B619FE2005DC13A /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		D03610112B606A73001CFE29 /* GarageWatchHass Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GarageWatchHass Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03610142B606A73001CFE29 /* GarageWatchHassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageWatchHassApp.swift; sourceTree = "<group>"; };
-		D03610162B606A73001CFE29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D03610182B606A75001CFE29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D036101B2B606A75001CFE29 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D03610222B606B14001CFE29 /* WatchRestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRestManager.swift; sourceTree = "<group>"; };
@@ -63,6 +63,7 @@
 		D03610082B606A73001CFE29 = {
 			isa = PBXGroup;
 			children = (
+				D01918AD2B619FE2005DC13A /* Secrets.plist */,
 				D03610132B606A73001CFE29 /* GarageWatchHass Watch App */,
 				D03610122B606A73001CFE29 /* Products */,
 				D03610242B606B52001CFE29 /* Frameworks */,
@@ -82,7 +83,6 @@
 			children = (
 				D03610452B60963D001CFE29 /* Views */,
 				D03610142B606A73001CFE29 /* GarageWatchHassApp.swift */,
-				D03610162B606A73001CFE29 /* ContentView.swift */,
 				D03610182B606A75001CFE29 /* Assets.xcassets */,
 				D036101A2B606A75001CFE29 /* Preview Content */,
 				D03610222B606B14001CFE29 /* WatchRestManager.swift */,
@@ -177,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D036101C2B606A75001CFE29 /* Preview Assets.xcassets in Resources */,
+				D01918AE2B619FE2005DC13A /* Secrets.plist in Resources */,
 				D03610192B606A75001CFE29 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,7 +189,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D03610172B606A73001CFE29 /* ContentView.swift in Sources */,
 				D03610152B606A73001CFE29 /* GarageWatchHassApp.swift in Sources */,
 				D03610442B6095C7001CFE29 /* WatchViewModel.swift in Sources */,
 				D03610422B609574001CFE29 /* WatchView.swift in Sources */,
@@ -326,7 +326,7 @@
 				DEVELOPMENT_TEAM = G3337N7QRS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = GarageWatchHass;
+				INFOPLIST_KEY_CFBundleDisplayName = AccessGar;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -356,7 +356,7 @@
 				DEVELOPMENT_TEAM = G3337N7QRS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = GarageWatchHass;
+				INFOPLIST_KEY_CFBundleDisplayName = AccessGar;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
 				LD_RUNPATH_SEARCH_PATHS = (

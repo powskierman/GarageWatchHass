@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import WatchConnectivity
 
 struct WatchView: View {
     @ObservedObject var watchViewModel: WatchViewModel

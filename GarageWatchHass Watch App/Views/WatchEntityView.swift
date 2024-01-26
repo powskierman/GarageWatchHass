@@ -11,15 +11,15 @@ struct WatchEntityView: View {
     @ObservedObject var viewModel: WatchViewModel
     let entityType: EntityType
     @State private var showingAlarmConfirmation = false // State for controlling the display of the confirmation dialog
-
+    
     var body: some View {
         Button(action: handleButtonPress) {
             VStack {
                 if let errorMessage = viewModel.errorMessage {
-                      Text(errorMessage)
-                          .foregroundColor(.red)
-                          .padding()
-                  }
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
+                }
                 entityImage
                 Text(entityLabel)
             }
@@ -33,7 +33,7 @@ struct WatchEntityView: View {
             Button("Cancel", role: .cancel) {}
         }
     }
-
+    
     private var entityImage: some View {
         switch entityType {
         case .door(let doorType):
@@ -47,7 +47,7 @@ struct WatchEntityView: View {
                 .scaledToFit()
         }
     }
-
+    
     private var entityLabel: String {
         switch entityType {
         case .door(let doorType):
@@ -56,7 +56,7 @@ struct WatchEntityView: View {
             return "Alarm"
         }
     }
-
+    
     private var entityBackgroundColor: Color {
         switch entityType {
         case .door(let doorType):
@@ -66,25 +66,25 @@ struct WatchEntityView: View {
             return viewModel.alarmOff ? Color.teal : Color.pink
         }
     }
-
+    
     private func handleButtonPress() {
-        viewModel.checkWebSocketConnection {
-            switch self.entityType {
-            case .door(let doorType):
-                let entityId = doorType == .left ? "switch.left_garage_door" : "switch.right_garage_door"
-                self.viewModel.sendCommandToPhone(entityId: entityId, newState: "toggle")
-            case .alarm:
-                // Instead of directly toggling, show confirmation dialog
-                self.showingAlarmConfirmation = true
-            }
+        switch self.entityType {
+        case .door(let doorType):
+            let scriptId = doorType == .left ? "toggle_left_door" : "toggle_right_door"
+            callScript(scriptId)
+        case .alarm:
+            self.showingAlarmConfirmation = true
         }
     }
-
-     private func toggleAlarmState() {
-         viewModel.checkWebSocketConnection {
-             let entityId = "switch.alarm"
-             let newState = viewModel.alarmOff ? "on" : "off"
-             viewModel.sendCommandToPhone(entityId: entityId, newState: newState)
-         }
-     }
+    
+    private func callScript(_ scriptId: String) {
+        let entityId = "script.\(scriptId)"
+        WatchRestManager.shared.handleScriptAction(entityId: entityId)
+    }
+    
+    
+    private func toggleAlarmState() {
+        let scriptId = viewModel.alarmOff ? "toggle_alarm_on" : "toggle_alarm_off"
+        callScript(scriptId)
+    }
 }
