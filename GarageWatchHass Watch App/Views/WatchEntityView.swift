@@ -10,10 +10,17 @@ import SwiftUI
 struct WatchEntityView: View {
     @ObservedObject var viewModel: WatchViewModel
     let entityType: EntityType
-    @State private var showingAlarmConfirmation = false // State for controlling the display of the confirmation dialog
-    
+    @State private var showingAlarmConfirmation = false
+    @State private var isPressed = false // New state variable for color change
+
     var body: some View {
-        Button(action: handleButtonPress) {
+        Button(action: {
+            isPressed = true // Change color when pressed
+            handleButtonPress()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                isPressed = false // Revert color back after 500ms
+            }
+        }) {
             VStack {
                 if let errorMessage = viewModel.errorMessage {
                     Text(errorMessage)
@@ -25,7 +32,7 @@ struct WatchEntityView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(entityBackgroundColor)
+        .background(isPressed ? Color.yellow : entityBackgroundColor) // Use isPressed to determine background color
         .confirmationDialog("Confirm Alarm Change", isPresented: $showingAlarmConfirmation) {
             Button("Confirm", role: .destructive) {
                 toggleAlarmState()
