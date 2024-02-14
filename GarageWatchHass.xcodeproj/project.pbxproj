@@ -11,13 +11,12 @@
 		D03610152B606A73001CFE29 /* GarageWatchHassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610142B606A73001CFE29 /* GarageWatchHassApp.swift */; };
 		D03610192B606A75001CFE29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03610182B606A75001CFE29 /* Assets.xcassets */; };
 		D036101C2B606A75001CFE29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D036101B2B606A75001CFE29 /* Preview Assets.xcassets */; };
-		D03610232B606B14001CFE29 /* WatchRestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610222B606B14001CFE29 /* WatchRestManager.swift */; };
 		D03610262B606B52001CFE29 /* HassFramework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D03610252B606B52001CFE29 /* HassFramework.xcframework */; };
 		D03610272B606B52001CFE29 /* HassFramework.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D03610252B606B52001CFE29 /* HassFramework.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D03610402B609305001CFE29 /* enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D036103F2B609305001CFE29 /* enums.swift */; };
 		D03610422B609574001CFE29 /* WatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610412B609574001CFE29 /* WatchView.swift */; };
-		D03610442B6095C7001CFE29 /* WatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610432B6095C7001CFE29 /* WatchViewModel.swift */; };
 		D03610472B609662001CFE29 /* WatchEntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610462B609662001CFE29 /* WatchEntityView.swift */; };
+		D04C99BD2B7C505B00266270 /* WatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C99BC2B7C505B00266270 /* WatchManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,16 +35,15 @@
 
 /* Begin PBXFileReference section */
 		D01918AD2B619FE2005DC13A /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
-		D03610112B606A73001CFE29 /* AccessGarage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccessGarage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D03610112B606A73001CFE29 /* _Garage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = _Garage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03610142B606A73001CFE29 /* GarageWatchHassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageWatchHassApp.swift; sourceTree = "<group>"; };
 		D03610182B606A75001CFE29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D036101B2B606A75001CFE29 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D03610222B606B14001CFE29 /* WatchRestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRestManager.swift; sourceTree = "<group>"; };
 		D03610252B606B52001CFE29 /* HassFramework.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = HassFramework.xcframework; path = ../Frameworks/HassFramework/HassFramework.xcframework; sourceTree = "<group>"; };
 		D036103F2B609305001CFE29 /* enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enums.swift; sourceTree = "<group>"; };
 		D03610412B609574001CFE29 /* WatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchView.swift; sourceTree = "<group>"; };
-		D03610432B6095C7001CFE29 /* WatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchViewModel.swift; sourceTree = "<group>"; };
 		D03610462B609662001CFE29 /* WatchEntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchEntityView.swift; sourceTree = "<group>"; };
+		D04C99BC2B7C505B00266270 /* WatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +71,7 @@
 		D03610122B606A73001CFE29 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D03610112B606A73001CFE29 /* AccessGarage.app */,
+				D03610112B606A73001CFE29 /* _Garage.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,9 +83,8 @@
 				D03610142B606A73001CFE29 /* GarageWatchHassApp.swift */,
 				D03610182B606A75001CFE29 /* Assets.xcassets */,
 				D036101A2B606A75001CFE29 /* Preview Content */,
-				D03610222B606B14001CFE29 /* WatchRestManager.swift */,
 				D036103F2B609305001CFE29 /* enums.swift */,
-				D03610432B6095C7001CFE29 /* WatchViewModel.swift */,
+				D04C99BC2B7C505B00266270 /* WatchManager.swift */,
 			);
 			path = "GarageWatchHass Watch App";
 			sourceTree = "<group>";
@@ -135,7 +132,7 @@
 			);
 			name = "GarageWatchHass Watch App";
 			productName = "GarageWatchHass Watch App";
-			productReference = D03610112B606A73001CFE29 /* AccessGarage.app */;
+			productReference = D03610112B606A73001CFE29 /* _Garage.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -190,11 +187,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D03610152B606A73001CFE29 /* GarageWatchHassApp.swift in Sources */,
-				D03610442B6095C7001CFE29 /* WatchViewModel.swift in Sources */,
 				D03610422B609574001CFE29 /* WatchView.swift in Sources */,
 				D03610402B609305001CFE29 /* enums.swift in Sources */,
+				D04C99BD2B7C505B00266270 /* WatchManager.swift in Sources */,
 				D03610472B609662001CFE29 /* WatchEntityView.swift in Sources */,
-				D03610232B606B14001CFE29 /* WatchRestManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,7 +332,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
-				PRODUCT_NAME = AccessGarage;
+				PRODUCT_NAME = _Garage;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -367,7 +363,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
-				PRODUCT_NAME = AccessGarage;
+				PRODUCT_NAME = _Garage;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;

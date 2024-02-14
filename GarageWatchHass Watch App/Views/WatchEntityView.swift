@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WatchEntityView: View {
-    @ObservedObject var viewModel: WatchViewModel
+    @ObservedObject var viewModel: WatchManager
     let entityType: EntityType
     @State private var showingAlarmConfirmation = false
     @State private var isPressed = false // New state variable for color change
@@ -86,7 +86,7 @@ struct WatchEntityView: View {
     
     private func callScript(_ scriptId: String) {
         let entityId = "script.\(scriptId)"
-        WatchRestManager.shared.handleScriptAction(entityId: entityId)
+        WatchManager.shared.handleScriptAction(entityId: entityId)
     }
     
     

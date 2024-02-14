@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WatchView: View {
-    @ObservedObject var watchViewModel: WatchViewModel
+    @ObservedObject var watchViewModel: WatchManager
 
     var body: some View {
         TabView {

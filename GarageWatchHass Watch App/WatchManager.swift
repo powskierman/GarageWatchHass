@@ -1,46 +1,40 @@
+//
+//  WatchManager.swift
+//  GarageWatchHass Watch App
+//
+//  Created by Michel Lapointe on 2024-02-13.
+//
+
 import SwiftUI
 import Combine
 import HassWatchFramework
 
-class WatchViewModel: ObservableObject {
+class WatchManager: ObservableObject {
     @Published var leftDoorClosed: Bool = true
     @Published var rightDoorClosed: Bool = true
     @Published var alarmOff: Bool = true
     @Published var errorMessage: String?
+    @Published var lastCallStatus: CallStatus = .pending
+    @Published var hasErrorOccurred: Bool = false
 
     private var restClient: HassRestClient?
+    private var cancellables = Set<AnyCancellable>()
+    private var initializationFailed = false
+    
+    static let shared = WatchManager()
 
     init() {
-        print("[WatchViewModel] Initializing...")
         self.restClient = HassRestClient()
-        print("[WatchViewModel] HassRestClient initialized.")
+        print("[WatchManager] Initialized with REST client.")
 
         if restClient == nil {
-            print("[WatchViewModel] Failed to initialize HassRestClient.")
+            print("[WatchManager] Failed to initialize HassRestClient.")
             self.errorMessage = "Failed to initialize HassRestClient"
         } else {
-            print("[WatchViewModel] Fetching initial state.")
+            print("[WatchManager] Fetching initial state.")
             fetchInitialState()
         }
     }
-
-//class WatchViewModel: ObservableObject {
-//    @Published var leftDoorClosed: Bool = true
-//    @Published var rightDoorClosed: Bool = true
-//    @Published var alarmOff: Bool = true
-//    @Published var errorMessage: String?
-//
-//    private let restClient: HassRestClient?
-//
-//    init() {
-//        restClient = HassRestClient()
-//        if restClient == nil {
-//            print("[WatchViewModel] Failed to initialize HassRestClient.")
-//            self.errorMessage = "Failed to initialize HassRestClient"
-//        } else {
-//            fetchInitialState()
-//        }
-//    }
 
     func fetchInitialState() {
         fetchState(for: "binary_sensor.left_door_sensor") { self.leftDoorClosed = $0 }
@@ -50,7 +44,7 @@ class WatchViewModel: ObservableObject {
 
     private func fetchState(for entityId: String, update: @escaping (Bool) -> Void) {
         guard let restClient = restClient else {
-            print("[WatchViewModel] RestClient is nil.")
+            print("[WatchManager] RestClient is nil.")
             return
         }
 
@@ -58,10 +52,10 @@ class WatchViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let entity):
-                    print("[WatchViewModel] Fetched state for \(entityId): \(entity.state)")
+                    print("[WatchManager] Fetched state for \(entityId): \(entity.state)")
                     update(entity.state == "off")
                 case .failure(let error):
-                    print("[WatchViewModel] Error fetching state for \(entityId): \(error)")
+                    print("[WatchManager] Error fetching state for \(entityId): \(error)")
                     self.errorMessage = "Failed to fetch state for \(entityId)"
                 }
             }
@@ -70,7 +64,7 @@ class WatchViewModel: ObservableObject {
 
     func sendCommand(entityId: String, newState: String) {
         guard let restClient = restClient else {
-            print("[WatchViewModel] RestClient is nil.")
+            print("[WatchManager] RestClient is nil.")
             return
         }
 
@@ -78,12 +72,30 @@ class WatchViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let entity):
-                    print("[WatchViewModel] Command sent successfully to \(entityId): \(entity.state)")
+                    print("[WatchManager] Command sent successfully to \(entityId): \(entity.state)")
                     // Update UI based on the response
                     // ... (handle the update here)
                 case .failure(let error):
-                    print("[WatchViewModel] Error sending command to \(entityId): \(error)")
+                    print("[WatchManager] Error sending command to \(entityId): \(error)")
                     self.errorMessage = "Failed to send command to \(entityId)"
+                }
+            }
+        }
+    }
+
+    func handleScriptAction(entityId: String) {
+        print("[WatchManager] Handling script action for \(entityId)")
+        lastCallStatus = .pending
+        restClient?.callScript(entityId: entityId) { [weak self] (result: Result<Void, Error>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success():
+                    print("[WatchManager] Script executed successfully")
+                    self?.lastCallStatus = .success
+                case .failure(let error):
+                    print("[WatchManager] Error executing script \(entityId): \(error)")
+                    self?.lastCallStatus = .failure
+                    self?.errorMessage = "Failed to execute script \(entityId)"
                 }
             }
         }
