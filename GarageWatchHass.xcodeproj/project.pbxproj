@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0116BF32B85610300E83300 /* HassFramework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D03610252B606B52001CFE29 /* HassFramework.xcframework */; };
 		D01918AE2B619FE2005DC13A /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D01918AD2B619FE2005DC13A /* Secrets.plist */; };
 		D03610152B606A73001CFE29 /* GarageWatchHassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03610142B606A73001CFE29 /* GarageWatchHassApp.swift */; };
 		D03610192B606A75001CFE29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03610182B606A75001CFE29 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D03610262B606B52001CFE29 /* HassFramework.xcframework in Frameworks */,
+				D0116BF32B85610300E83300 /* HassFramework.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

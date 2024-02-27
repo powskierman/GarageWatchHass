@@ -24,7 +24,7 @@ class WatchManager: ObservableObject {
     static let shared = WatchManager()
 
     init() {
-        self.restClient = HassRestClient()
+        self.restClient = HassRestClient.shared
         print("[WatchManager] Initialized with REST client.")
 
         if restClient == nil {
@@ -38,6 +38,7 @@ class WatchManager: ObservableObject {
 
     func fetchInitialState() {
         fetchState(for: "binary_sensor.left_door_sensor") { self.leftDoorClosed = $0 }
+        print("[WatchManager 41] ")
         fetchState(for: "binary_sensor.right_door_sensor") { self.rightDoorClosed = $0 }
         fetchState(for: "binary_sensor.alarm_sensor") { self.alarmOff = $0 }
     }
@@ -62,7 +63,7 @@ class WatchManager: ObservableObject {
         }
     }
 
-    func sendCommand(entityId: String, newState: String) {
+    func sendCommand(entityId: String, newState: Int) {
         guard let restClient = restClient else {
             print("[WatchManager] RestClient is nil.")
             return
