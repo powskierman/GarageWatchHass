@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HassWatchFramework
 
 struct WatchEntityView: View {
     @ObservedObject var viewModel: WatchManager
@@ -77,8 +78,8 @@ struct WatchEntityView: View {
     private func handleButtonPress() {
         switch self.entityType {
         case .door(let doorType):
-            let scriptId = doorType == .left ? "toggle_left_door" : "toggle_right_door"
-            callScript(scriptId)
+            let entityId = doorType == .left ? "switch.left_garage_door" : "switch.right_garage_door"
+            toggleSwitch(entityId: entityId)        
         case .alarm:
             self.showingAlarmConfirmation = true
         }
@@ -89,9 +90,28 @@ struct WatchEntityView: View {
         WatchManager.shared.handleScriptAction(entityId: entityId)
     }
     
-    
+    private func toggleSwitch(entityId: String) {
+        print("[WatchEntityView] Toggling switch for \(entityId)")
+  //      lastCallStatus = .pending
+        HassRestClient.shared.callService(domain: "switch", service: "toggle", entityId: entityId) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success():
+                    print("[GarageRestManager] Successfully toggled switch \(entityId)")
+                    viewModel.lastCallStatus = .success
+                    // Optionally fetch state if needed to update UI or confirm change
+                    viewModel.fetchInitialState()
+                case .failure(let error):
+                    print("[GarageRestManager] Error toggling switch \(entityId): \(error)")
+                    viewModel.lastCallStatus = .failure
+                    viewModel.error = error
+                    viewModel.hasErrorOccurred = true
+                }
+            }
+        }
+    }
     private func toggleAlarmState() {
-        let scriptId = viewModel.alarmOff ? "toggle_alarm_on" : "toggle_alarm_off"
-        callScript(scriptId)
+        let entityId = viewModel.alarmOff ? "switch.alarm_on" : "switch.alarm_off"
+        toggleSwitch(entityId: entityId)
     }
 }

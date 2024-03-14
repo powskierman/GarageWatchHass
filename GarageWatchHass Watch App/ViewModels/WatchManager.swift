@@ -13,10 +13,11 @@ class WatchManager: ObservableObject {
     @Published var leftDoorClosed: Bool = true
     @Published var rightDoorClosed: Bool = true
     @Published var alarmOff: Bool = true
+    @Published var error: Error?
+    @Published var hasErrorOccurred: Bool = false
     @Published var errorMessage: String?
     @Published var lastCallStatus: CallStatus = .pending
-    @Published var hasErrorOccurred: Bool = false
-
+    
     private var restClient: HassRestClient?
     private var cancellables = Set<AnyCancellable>()
     private var initializationFailed = false
